@@ -1,0 +1,3 @@
+export {
+  fetchPhotos,
+} from './photos';

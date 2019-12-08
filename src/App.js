@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect }  from 'react';
 import './App.css';
-import Thumbnail from './components/Thumbnail/Thumbnail';
+import useGlobal from "./store";
+import Album from './components/Album/Album';
 
 function App() {
+  const [globalState, globalActions] = useGlobal();
+  const { photos } = globalState;
+
+  useEffect(() => {
+    globalActions.fetchPhotos();
+  }, [globalActions]);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -29,13 +37,7 @@ function App() {
         </section>
 
         <section className="Album">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-4"><Thumbnail /></div>
-              <div className="col-md-4"><Thumbnail /></div>
-              <div className="col-md-4"><Thumbnail /></div>
-            </div>
-          </div>
+          <Album images={ photos }/>
         </section>
       </main>
     </div>

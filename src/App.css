@@ -1,11 +1,17 @@
 .App {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .App-header {
+  font-family: 'Roboto Black', sans-serif;
   background: #333A40;
   padding: 1rem;
   color: #FFFFFF;
+}
+
+.App-header--logo {
+  font-family: 'Gravitas One', cursive;
+  font-weight: 900;
 }
 
 .App-highlight .container {

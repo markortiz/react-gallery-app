@@ -17,7 +17,7 @@ function App() {
         <div className="container">
           <div className="row">
             <div className="col-8">
-              <h4>Album</h4>
+              <h4 className="App-header--logo">.img</h4>
             </div>
           </div>
         </div>

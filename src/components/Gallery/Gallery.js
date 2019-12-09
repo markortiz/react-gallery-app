@@ -2,8 +2,6 @@ import React from 'react';
 import './Gallery.css';
 import { LazyLoadImage, trackWindowScroll } from 'react-lazy-load-image-component';
 
-
-
 function Gallery({ images, scrollPosition }) {
   return (
     <div className="Gallery row">

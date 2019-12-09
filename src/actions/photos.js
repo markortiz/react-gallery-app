@@ -1,4 +1,4 @@
-import { setPhotoList } from '../reducer';
+import { setPhotoList, setError } from '../reducer';
 
 const baseUrl = "https://api.unsplash.com";
 const clientID = 'Client-ID 8f9fbd10d8bb0a7e69dd531aea77d5a0b84152b806286ed7f83f896c1987413b';
@@ -49,7 +49,7 @@ const searchPhotos = (store, params = {}) => {
       setPhotoList(store, payload);
     })
     .catch((error) => {
-      alert('Something went wrong...');
+      setError(store, 'Something went wrong...');
       console.error(error);
     });
 }

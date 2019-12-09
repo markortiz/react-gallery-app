@@ -5,17 +5,19 @@ import Album from './components/Album/Album';
 
 function App() {
   const [globalState, globalActions] = useGlobal();
-  const { photoList } = globalState;
+  const { error, photoList } = globalState;
   const pageSizes = [10, 20, 30, 40, 50];
   const availableOrientation = ['None', 'Landscape', 'Portrait', 'Squarish'];
 
   const formSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
+    let orientation = data.get('orientation').toLowerCase();
+    orientation = orientation === 'none' ? null : orientation;
 
     globalActions.searchPhotos({ 
       isSearch: true, 
-      orientation: data.get('orientation').toLowerCase(),
+      orientation,
       page: 1,
       perPage: data.get('perPage'),
       query: data.get('query'),
@@ -56,6 +58,9 @@ function App() {
             <h1>Find your image.</h1>
             <p className="lead text-muted">Aliquam laoreet urna at lectus imperdiet, non euismod erat dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             <form onSubmit={formSubmit}>
+              {
+                error && <div class="alert alert-danger text-left" role="alert">{error}</div>
+              }
               <div className="input-group mb-1">
                 <input type="text" 
                   className="form-control"
@@ -100,7 +105,6 @@ function App() {
                       </select>
                     </div>
                   </div>
-                
                 </div>
               </div>
             </form>

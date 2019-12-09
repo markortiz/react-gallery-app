@@ -4,8 +4,8 @@ import useGlobalHook from "./global-hooks";
 import * as actions from "../actions";
 
 const initialState = {
-  photos: [],
-  photosPage: 0,
+  currentPage: 0,
+  photoList: [],
   error: '',
 };
 

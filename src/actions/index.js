@@ -1,3 +1,3 @@
 export {
-  fetchPhotos,
+  searchPhotos
 } from './photos';

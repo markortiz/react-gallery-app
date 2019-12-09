@@ -8,13 +8,14 @@ import Gallery from '../Gallery/Gallery';
 
 function Album({ images }) {
   const [globalState, globalActions] = useGlobal();
-  const { photosPage } = globalState;
-
+  const { currentPage } = globalState;
   const fetchImages = () => {
-    const nextPage = photosPage + 1;
+    const nextPage = currentPage + 1;
 
-    globalActions.fetchPhotos(nextPage);
+    globalActions.searchPhotos({ ...globalState, ...{ page:nextPage } });
   }
+
+
   return (
     <div className="Album container">
         <InfiniteScroll

@@ -1,7 +1,7 @@
 import { setPhotoList, setError } from '../reducer';
 
 const baseUrl = "https://api.unsplash.com";
-const clientID = 'Client-ID 8f9fbd10d8bb0a7e69dd531aea77d5a0b84152b806286ed7f83f896c1987413b';
+const clientID = '';
 const headers = { 
   'Authorization': clientID,
   'Accept-Version': 'v1',
@@ -37,16 +37,20 @@ const searchPhotos = (store, params = {}) => {
 
   fetch(url, { headers }).then((response) => response.json())
     .then((response) => {
-      const payload = {
-        isSearch,
-        currentPage,
-        perPage,
-        orientation,
-        query,
-        response,
-      }
+      if(response && response.constructor === Array) {
+        const payload = {
+          isSearch,
+          currentPage,
+          perPage,
+          orientation,
+          query,
+          response,
+        };
 
-      setPhotoList(store, payload);
+        setPhotoList(store, payload);
+      } else {
+        setError(store, 'Something went wrong...');
+      }
     })
     .catch((error) => {
       setError(store, 'Something went wrong...');

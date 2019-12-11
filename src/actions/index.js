@@ -1,3 +1,3 @@
 export {
   searchPhotos
-} from './photos';
+} from './photoList';

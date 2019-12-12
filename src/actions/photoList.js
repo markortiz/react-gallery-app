@@ -1,7 +1,8 @@
 import { setPhotoList, setError } from '../reducer';
 
 const baseUrl = "https://api.unsplash.com";
-const clientID = '';
+const API_KEY = process.env.REACT_APP_API_KEY;
+const clientID = `Client-ID ${API_KEY}` || null;
 const headers = { 
   'Authorization': clientID,
   'Accept-Version': 'v1',
@@ -37,7 +38,7 @@ const searchPhotos = (store, params = {}) => {
 
   fetch(url, { headers }).then((response) => response.json())
     .then((response) => {
-      if(response && response.constructor === Array) {
+      if(response && (response.constructor === Array || response.constructor === Object)) {
         const payload = {
           isSearch,
           currentPage,
@@ -49,12 +50,13 @@ const searchPhotos = (store, params = {}) => {
 
         setPhotoList(store, payload);
       } else {
+        console.error('ERROR: Got invalid response.', response);
         setError(store, 'Something went wrong...');
       }
     })
     .catch((error) => {
       setError(store, 'Something went wrong...');
-      console.error(error);
+      console.error('ERROR: ', error);
     });
 }
 

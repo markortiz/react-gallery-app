@@ -39,3 +39,9 @@ In the project directory, run:
 ```bash
 yarn test
 ```
+
+## Frontend Architecture
+
+For this project all business logic are in the higher order component which is `App.js` so that all `components` can be reusable on other project or purpose.
+I also did not separate into other files the small dumb component that will only use for that specific component.
+I put `API_KEY` on environment level for security practice.

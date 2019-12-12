@@ -1,12 +1,17 @@
 import React, { useEffect }  from 'react';
 import './App.css';
 import useGlobal from "./store";
-import Album from './components/Album/Album';
-import SearchForm from './components/SearchForm/SearchForm';
+import { Album } from './components/Album';
+import { SearchForm } from './components/SearchForm';
 
 function App() {
   const [globalState, globalActions] = useGlobal();
-  const { photoList } = globalState;
+  const { currentPage, hasNextPage, photoList } = globalState;
+  const fecthNextPage = () => {
+    const nextPage = currentPage + 1;
+
+    globalActions.searchPhotos({ ...globalState, ...{ page:nextPage } });
+  }
 
   useEffect(() => {
     globalActions.searchPhotos({ isSearch: false });
@@ -33,7 +38,10 @@ function App() {
         </section>
 
         <section className="Album">
-          <Album images={ photoList }/>
+          <Album
+            hasNextPage={ hasNextPage }
+            images={ photoList }
+            onNextPage={ fecthNextPage }/>
         </section>
       </main>
     </div>

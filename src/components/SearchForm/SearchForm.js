@@ -1,19 +1,27 @@
 import React from 'react';
 import useGlobal from "../../store";
 
+/**
+ * Dumb component to display error message.
+ * @param {String} error 
+ */
+const Error = (error) => <div className="alert alert-danger text-left" role="alert">{error}</div>;
+
 function SearchForm() {
   const [globalState, globalActions] = useGlobal();
   const { error } = globalState;
   const pageSizes = [10, 20, 30, 40, 50];
-  const availableOrientation = ['None', 'Landscape', 'Portrait', 'Squarish'];
+  const availableOrientation = ['Any', 'Landscape', 'Portrait', 'Squarish'];
 
-  const formSubmit = (event) => {
+  const onSubmitForm = (event) => {
     event.preventDefault();
+    // Get forms input data.
     const data = new FormData(event.target);
     let orientation = data.get('orientation').toLowerCase();
-    orientation = orientation === 'none' ? null : orientation;
+    // set to null if orientation is any so it won't be submitted as url param.
+    orientation = orientation === 'any' ? null : orientation;
 
-    globalActions.searchPhotos({ 
+    globalActions.searchPhotos({
       isSearch: true, 
       orientation,
       page: 1,
@@ -21,7 +29,7 @@ function SearchForm() {
       query: data.get('query'),
     });
   }
-  const showAdvanceForm = (event) => {
+  const toggleAdvanceForm = (event) => {
     event.preventDefault();
 
     const form = document.querySelector('#Form-advance-search');
@@ -36,26 +44,26 @@ function SearchForm() {
 
 
   return (
-    <form className="Search" onSubmit={formSubmit}>
+    <form className="Search" onSubmit={onSubmitForm}>
       {
-        error && <div className="alert alert-danger text-left" role="alert">{error}</div>
+        error && <Error error={error} />
       }
       <div className="input-group mb-1">
         <input type="text" 
-          className="form-control"
+          className="Search-query form-control"
           placeholder="Keyword"
           aria-label="Search"
           aria-describedby="search-field"
           name="query"/>
         <div className="input-group-append">
-          <button className="btn btn-outline-secondary" type="submit" id="search-field">
+          <button className="Search-submit-btn btn btn-outline-secondary" type="submit" id="search-field">
             Search
           </button>
         </div>
       </div>
       <div className="row">
         <div className="col-12 text-right">
-          <button className="btn btn-link" onClick={showAdvanceForm}>Advance Search</button>
+          <button className="btn btn-link" onClick={toggleAdvanceForm}>Advance Search</button>
         </div>
       </div>
       <div className="collapse" id="Form-advance-search">
@@ -90,4 +98,4 @@ function SearchForm() {
   );
 }
 
-export default SearchForm;
+export { SearchForm };

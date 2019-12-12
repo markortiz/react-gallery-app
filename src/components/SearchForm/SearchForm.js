@@ -4,7 +4,7 @@ import React from 'react';
  * Dumb component to display error message.
  * @param {String} error 
  */
-const Error = (error) => <div className="alert alert-danger text-left" role="alert">{error}</div>;
+const ErrorMsg = ({error}) => (<div className="alert alert-danger text-left" role="alert">{error}</div>)
 
 /**
  * This will display and call an action on form submit.
@@ -47,7 +47,7 @@ function SearchForm({ error, onSubmit }) {
   return (
     <form className="Search" onSubmit={onSubmitForm}>
       {
-        error && <Error error={error} />
+        error && <ErrorMsg error={error} />
       }
       <div className="input-group mb-1">
         <input type="text" 

@@ -1,5 +1,4 @@
 import React from 'react';
-import useGlobal from "../../store";
 
 /**
  * Dumb component to display error message.
@@ -7,9 +6,11 @@ import useGlobal from "../../store";
  */
 const Error = (error) => <div className="alert alert-danger text-left" role="alert">{error}</div>;
 
-function SearchForm() {
-  const [globalState, globalActions] = useGlobal();
-  const { error } = globalState;
+/**
+ * This will display and call an action on form submit.
+ * @param {Object} props contains `error` message and `onSubmit` function.
+ */
+function SearchForm({ error, onSubmit }) {
   const pageSizes = [10, 20, 30, 40, 50];
   const availableOrientation = ['Any', 'Landscape', 'Portrait', 'Squarish'];
 
@@ -21,7 +22,7 @@ function SearchForm() {
     // set to null if orientation is any so it won't be submitted as url param.
     orientation = orientation === 'any' ? null : orientation;
 
-    globalActions.searchPhotos({
+    onSubmit({
       isSearch: true, 
       orientation,
       page: 1,

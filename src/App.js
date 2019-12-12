@@ -6,11 +6,14 @@ import { SearchForm } from './components/SearchForm';
 
 function App() {
   const [globalState, globalActions] = useGlobal();
-  const { currentPage, hasNextPage, photoList } = globalState;
+  const { currentPage, error, hasNextPage, photoList } = globalState;
   const fecthNextPage = () => {
     const nextPage = currentPage + 1;
 
     globalActions.searchPhotos({ ...globalState, ...{ page:nextPage } });
+  }
+  const searchPhotos = (payload) => {
+    globalActions.searchPhotos(payload);
   }
 
   useEffect(() => {
@@ -33,7 +36,7 @@ function App() {
           <div className="container">
             <h1>Find your image.</h1>
             <p className="lead text-muted">Aliquam laoreet urna at lectus imperdiet, non euismod erat dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <SearchForm />
+            <SearchForm error={error} onSubmit={searchPhotos} />
           </div>
         </section>
 

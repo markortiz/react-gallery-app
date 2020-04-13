@@ -9,7 +9,11 @@
   color: #FFFFFF;
 }
 
+.App-header--link,
+.App-header--link:hover,
 .App-header--logo {
+  color: #FFFFFF;
+  text-decoration: none;
   font-family: 'Gravitas One', cursive;
   font-weight: 900;
 }

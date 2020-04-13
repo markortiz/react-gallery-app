@@ -19,7 +19,7 @@ In the project directory, run:
 yarn install // This will install all dependencies.
 ```
 
-Before you start the project fill the `*_API_KEY`'s in `.env` file.
+Before you start the project fill the `*_API_KEY`'s in `.env` file in able to use Unsplash API.
 
 ```text
 REACT_APP_API_KEY=************ // put you own Unsplash api key here

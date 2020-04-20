@@ -26,8 +26,8 @@ function App() {
         <div className="container">
           <div className="row">
             <div className="col-8">
-              <a className="App-header--link" href="/" title="Back to home">
-                <h4 className="App-header--logo">.img</h4>
+              <a className="App-header--link" href="https://devken.net/" title="Back to home">
+                <h4 className="App-header--logo">Home</h4>
               </a>
             </div>
           </div>
